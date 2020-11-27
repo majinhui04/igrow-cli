@@ -1,0 +1,60 @@
+{
+    "name": "igrow-cli",
+    "version": "0.0.1",
+    "description": "Contains useful JavaScript utilities and GitFlow commands for FE project",
+    "bin": {
+        "sg-log": "./git-log.sh",
+        "igrow": "bin/igrow.js"
+    },
+    "main": "index.js",
+    "scripts": {
+        "server": "node build/app.js",
+        "test": "cross-env BABEL_ENV='test' jest --coverage",
+        "dev": "better-npm-run dev",
+        "build": "better-npm-run build",
+        "build:styles": "npm run build styles",
+        "libs": "npm run build helpers && npm run build http",
+        "release": "sh ./build/release.sh",
+        "changelog": "sh ./git-log.sh -m changelog -f"
+    },
+    "betterScripts": {
+        "build": {
+            "command": "node build",
+            "env": {
+                "BUILD": "production"
+            }
+        },
+        "dev": {
+            "command": "node build",
+            "env": {
+                "BUILD": "development"
+            }
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/majinhui04/sharegood-utils.git"
+    },
+    "keywords": [
+        "npm",
+        "rollup"
+    ],
+    "author": "jinhui.m",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/majinhui04/sharegood-utils/issues"
+    },
+    "homepage": "https://github.com/majinhui04/sharegood-utils#readme",
+    "devDependencies": {},
+    "dependencies": {
+        "boxen": "^4.2.0",
+        "chalk": "^4.1.0",
+        "commander": "^6.2.0",
+        "download-git-repo": "^3.0.2",
+        "fs-extra": "^9.0.1",
+        "inquirer": "^7.3.3",
+        "ora": "^5.1.0",
+        "rimraf": "^3.0.2",
+        "update-notifier": "^5.0.1"
+    }
+}
