@@ -3,7 +3,8 @@
     "version": "0.0.3",
     "description": "Contains useful JavaScript utilities and GitFlow commands for FE project",
     "bin": {
-        "sg-log": "./git-log.sh",
+        "fanyi": "bin/translator/cli.js",
+        "git-log": "./git-log.sh",
         "igrow": "bin/igrow.js"
     },
     "main": "index.js",
@@ -45,16 +46,21 @@
         "url": "https://github.com/majinhui04/sharegood-utils/issues"
     },
     "homepage": "https://github.com/majinhui04/sharegood-utils#readme",
-    "devDependencies": {},
+    "devDependencies": {
+        "execa": "^4.1.0"
+    },
     "dependencies": {
         "boxen": "^4.2.0",
         "chalk": "^4.1.0",
         "commander": "^6.2.0",
+        "configstore": "^5.0.1",
         "download-git-repo": "^3.0.2",
         "fs-extra": "^9.0.1",
         "inquirer": "^7.3.3",
         "ora": "^5.1.0",
         "rimraf": "^3.0.2",
-        "update-notifier": "^5.0.1"
+        "superagent": "^6.1.0",
+        "update-notifier": "^5.0.1",
+        "xml2js": "^0.4.23"
     }
 }
