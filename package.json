@@ -1,6 +1,6 @@
 {
     "name": "igrow-cli",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Contains useful JavaScript utilities and GitFlow commands for FE project",
     "bin": {
         "fanyi": "bin/translator/cli.js",
