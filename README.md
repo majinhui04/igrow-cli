@@ -118,6 +118,44 @@ $ fanyi
     use <source>     Change source to source
 ```
 
+### 自动生成 swagger-api 接口函数
+
+1.  下载完成后，我们需要在项目的根目录建立一个配置文件，默认名称叫 **sw.config.js** 的配置文件,执行命令 `sw-api` 能够自动执行该文件, 当然你也可以自由命名 `sw-api --config xxx`。
+
+2.  配置文件编写
+
+````js
+// 定义模板
+let tpl = ` export const {{apiname}} = (params = {}, config = {}) => {
+    params = {
+        ...params
+    }
+    return http.request({
+        method: '{{method}}',
+        url: '{{url}}',
+        body: params,
+        ...config
+    })
+}
+  `;
+
+3、执行 `sw-api`
+
+
+module.exports = {
+// entry 是 swagger 的一个叫 api-doc 的接口，可以从浏览器的网络面板中查看
+//entry: 'http://192.168.1.17:8081/v2/api-docs?group=pc',
+entry: "http://192.168.1.17:8088/v2/api-docs?group=grid",
+template: tpl, // 渲染的模板
+header: `import http from '@/scripts/http'`, // 该文件需要引入的模块
+typescript: false, // 是否支持 ts
+output: {
+path: "./src/sw-api",
+},
+};
+
+```
+
 ### 生成 Git 日志
 
 自动生成`git commit`记录用以统计个人项目周报，全组项目周报，版本、分支差异记录自动生成 Tag 等
@@ -151,13 +189,17 @@ $ fanyi
 使用
 
 ```
+
 # 周报
+
 git-log
 
-# 标签比对 此时需保证当前分支有未打tag的commit即可，即在开发分支即将合入master时使用最佳
+# 标签比对 此时需保证当前分支有未打 tag 的 commit 即可，即在开发分支即将合入 master 时使用最佳
+
 git-log -t -m tag
 
 # 项目 CHANGELOG
+
 git-log -m changelog -f
 
 ```
@@ -165,18 +207,22 @@ git-log -m changelog -f
 ### 全局运行命令调试
 
 ```
+
 npm install . -g
 或
 npm link
 
 修改命令路径需要先取消
 npm unlink
+
 ```
 
 ### 部署
 
 ```
+
 npm run release
+
 ```
 
 ## 参考资料
@@ -192,3 +238,5 @@ npm run release
 ## LICENSE
 
 MIT @ Ma Jinhui
+```
+````

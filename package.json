@@ -5,7 +5,8 @@
     "bin": {
         "fanyi": "bin/translator/cli.js",
         "git-log": "./git-log.sh",
-        "igrow": "bin/igrow.js"
+        "igrow": "bin/igrow.js",
+        "sw-api": "./bin/sw-api/cmd"
     },
     "main": "index.js",
     "scripts": {
@@ -50,6 +51,7 @@
         "execa": "^4.1.0"
     },
     "dependencies": {
+        "axios": "^0.21.1",
         "boxen": "^4.2.0",
         "chalk": "^4.1.0",
         "commander": "^6.2.0",
@@ -58,6 +60,7 @@
         "fs-extra": "^9.0.1",
         "inquirer": "^7.3.3",
         "ora": "^5.1.0",
+        "progress": "^2.0.3",
         "rimraf": "^3.0.2",
         "superagent": "^6.1.0",
         "update-notifier": "^5.0.1",
