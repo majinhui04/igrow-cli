@@ -156,7 +156,8 @@ function renderTpl(swconfig, swaggerFile) {
         renderStr += header;
         item.children.forEach((pathObj, idx) => {
             // 定义当前模板
-            const tempTpl = new ReplaceStr(summaryTpl + template);
+            let tempTpl = new ReplaceStr(summaryTpl + template);
+
             Object.keys(pathObj).forEach((typeKey) => {
                 if (pathKeyArr.includes(typeKey)) {
                     if (pathObj[typeKey]) {
@@ -171,6 +172,13 @@ function renderTpl(swconfig, swaggerFile) {
                                 /\(\{\{params\}\}\)/g,
                                 `({{params}}):Promise<${item.tsReturnTypeArr[idx]}>`
                             );
+                        }
+                        // 自定义
+                        if (swconfig.handleTemplate) {
+                            tempTpl = swconfig.handleTemplate(tempTpl, {
+                                method: typeKey,
+                                api: pathObj,
+                            });
                         }
 
                         // 渲染基本注释

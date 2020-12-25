@@ -13,6 +13,7 @@ $ yarn add -g igrow-cli
 ## Features
 
 -   [x] 初始化 vue 脚手架
+-   [x] 自动生成 swagger-api
 -   [x] 中文翻译英文
 -   [x] git 日志工具
 
@@ -120,11 +121,13 @@ $ fanyi
 
 ### 自动生成 swagger-api 接口函数
 
+#### 步骤
+
 1.  下载完成后，我们需要在项目的根目录建立一个配置文件，默认名称叫 **sw.config.js** 的配置文件,执行命令 `sw-api` 能够自动执行该文件, 当然你也可以自由命名 `sw-api --config xxx`。
 
 2.  配置文件编写
 
-````js
+```javascript
 // 定义模板
 let tpl = ` export const {{apiname}} = (params = {}, config = {}) => {
     params = {
@@ -133,28 +136,55 @@ let tpl = ` export const {{apiname}} = (params = {}, config = {}) => {
     return http.request({
         method: '{{method}}',
         url: '{{url}}',
-        body: params,
+        {{BODY}}: params,
         ...config
     })
 }
   `;
 
-3、执行 `sw-api`
-
-
 module.exports = {
-// entry 是 swagger 的一个叫 api-doc 的接口，可以从浏览器的网络面板中查看
-//entry: 'http://192.168.1.17:8081/v2/api-docs?group=pc',
-entry: "http://192.168.1.17:8088/v2/api-docs?group=grid",
-template: tpl, // 渲染的模板
-header: `import http from '@/scripts/http'`, // 该文件需要引入的模块
-typescript: false, // 是否支持 ts
-output: {
-path: "./src/sw-api",
-},
+    // entry 是swagger的一个叫api-doc的接口，可以从浏览器的网络面板中查看
+    //entry: 'http://192.168.1.17:8081/v2/api-docs?group=pc',
+    entry: "http://192.168.1.17:8088/v2/api-docs?group=grid",
+    template: tpl, // 渲染的模板
+    header: `import http from '@/scripts/http'`, // 该文件需要引入的模块
+    typescript: false, // 是否支持ts
+    output: {
+        path: "./src/sw-api",
+    },
+    handleTemplate(tpl, config) {
+        let method = config.method;
+        // $1 {{key}} $2 key
+        tpl.replace(/\{\{(.+?)\}\}/g, ($1, $2) => {
+            if ($2 === "BODY") {
+                return method === "post" ? "data" : "params";
+            } else {
+                return $1;
+            }
+        });
+        return tpl;
+    },
 };
-
 ```
+
+3. 执行 `sw-api`
+
+#### template 模板变量名称
+
+使用的是与 vue 类似的模板语法的来定义
+
+| 模板变量名 | 含义                                                            |
+| ---------- | --------------------------------------------------------------- |
+| apiname    | 最后生成的 api 名称                                             |
+| params     | 解构出来的参数**对象**                                          |
+| method     | 方法名称比如 get,post 等                                        |
+| url        | url                                                             |
+| query      | get 的 query 参数放在对象里面                                   |
+| body       | 如果该方法没有 body 参数则渲染一个空对象 (暂时没想到一个好方案) |
+
+#### 默认渲染的文件名称太长了有什么方法呢？
+
+请参考高级用法的 filterName 参数,默认是按照 swagger 的顺序映射的，key 为 swagger 对应的类别的索引,value 为映射名称。
 
 ### 生成 Git 日志
 
@@ -238,5 +268,7 @@ npm run release
 ## LICENSE
 
 MIT @ Ma Jinhui
+
 ```
-````
+
+```
