@@ -1,8 +1,19 @@
 
 
-## [v0.0.4](https://github.com/majinhui04/igrow-cli/compare/v0.0.4...v0.0.4) (2020-12-14)
+## [v0.0.5](https://github.com/majinhui04/igrow-cli/compare/v0.0.5...v0.0.5) (2020-12-25)
+#### 新增
+* 新增sw-api ([0f2ae6d](https://github.com/majinhui04/igrow-cli/commit/0f2ae6d9650090576f8b83ec1355e82617acd35a))  @504397517
+
+
+## [v0.0.5](https://github.com/majinhui04/igrow-cli/compare/v0.0.4...v0.0.5) (2020-12-14)
 #### 新增
 * add vue template ([84976b3](https://github.com/majinhui04/igrow-cli/commit/84976b359abdc91f8257daa86f18d362c8f1fcce))  @504397517
+
+#### 文档
+* 0.0.5 ([e487167](https://github.com/majinhui04/igrow-cli/commit/e4871673b15faf4f78e230e7220b951eaae58ba2))  @504397517
+
+#### 其他
+* 0.0.5 ([31beb90](https://github.com/majinhui04/igrow-cli/commit/31beb90290f79db55a46514b3d9f37afb647bfbc))  @504397517
 
 
 ## [v0.0.4](https://github.com/majinhui04/igrow-cli/compare/v0.0.3...v0.0.4) (2020-11-30)
